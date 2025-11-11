@@ -1,8 +1,3 @@
-fn main() {
-    println!("Hello, world!");
-}
+use std::io;
 
-#[test]
-fn say_hi() {
-    println!("Say hi anyone running this code");
-}
+fn main() {}
