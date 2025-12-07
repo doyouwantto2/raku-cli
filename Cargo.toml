@@ -6,8 +6,10 @@ edition = "2024"
 [dependencies]
 ratatui = { version = "0.29.0", features = ["crossterm"] }
 
-dirs-next = "2.0.0"
-eyre = "0.6.12"
+tokio = { version = "1.48.0", features = ["full"] } # Async runtime
+eyre = "0.6.12" # Handle errors
 
-fundsp = "0.20.0"
-rodio = "0.21.1"
+dirs-next = "2.0.0" # Storing records
+
+fundsp = "0.20.0" # Control 
+rodio = "0.21.1" # Generate
