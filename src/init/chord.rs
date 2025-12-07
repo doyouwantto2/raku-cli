@@ -19,12 +19,10 @@ pub fn chord() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Sample directory not found. Installing...");
 
-    // Download with resume support
     download_with_resume(DOWNLOAD_URL, ARCHIVE_NAME)?;
 
     println!("Extracting samples...");
 
-    // Stream directly from file to BzDecoder
     let archive_file = File::open(ARCHIVE_NAME)?;
     let decompressor = BzDecoder::new(archive_file);
     let mut archive = Archive::new(decompressor);
@@ -32,23 +30,19 @@ pub fn chord() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("✓ Samples extracted!");
 
-    // Optional: remove archive
     fs::remove_file(ARCHIVE_NAME)?;
     Ok(())
 }
 
-/// Downloads a file from URL with resume support
 fn download_with_resume(url: &str, output: &str) -> Result<(), Box<dyn std::error::Error>> {
     let client = Client::new();
 
-    // Check if partial file exists
     let mut downloaded: u64 = 0;
     if Path::new(output).exists() {
         downloaded = fs::metadata(output)?.len();
         println!("Resuming download at {} bytes…", downloaded);
     }
 
-    // Make ranged request
     let mut request = client.get(url);
     if downloaded > 0 {
         request = request.header("Range", format!("bytes={}-", downloaded));
@@ -59,7 +53,6 @@ fn download_with_resume(url: &str, output: &str) -> Result<(), Box<dyn std::erro
         return Err(format!("Failed to download: HTTP {}", response.status()).into());
     }
 
-    // Get total size
     let total_size = response
         .content_length()
         .map(|size| size + downloaded)
@@ -74,7 +67,6 @@ fn download_with_resume(url: &str, output: &str) -> Result<(), Box<dyn std::erro
     );
     pb.set_position(downloaded);
 
-    // Open file in append mode
     let mut file = OpenOptions::new().create(true).append(true).open(output)?;
 
     let mut buffer = [0u8; 32_768]; // bigger buffer for speed
