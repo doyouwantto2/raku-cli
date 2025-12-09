@@ -941,7 +941,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "raku"
+name = "raku-cli"
 version = "0.1.0"
 dependencies = [
  "dirs-next",
