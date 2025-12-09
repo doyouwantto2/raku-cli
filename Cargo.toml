@@ -6,19 +6,20 @@ edition = "2024"
 [dependencies]
 ratatui = { version = "0.29.0", features = ["crossterm"] }
 
-tokio = { version = "1.48.0", features = ["full"] } # Async runtime
-eyre = "0.6.12" # Handle errors
+# Run time
+tokio = { version = "1.48.0", features = ["full"] } 
+eyre = "0.6.12" 
 
-dirs-next = "2.0.0" # Storing records
+# Storage
+dirs-next = "2.0.0" 
 
-fundsp = "0.20.0" # Control 
-rodio = "0.21.1" # Generate
+# Play audio
+rodio = { version = "0.21.1", features = ["flac"] } # Generate
 
-# Archive.org
-reqwest = { version = "0.12.24", features = ["blocking", "json"] }
-indicatif = "0.18.3"
+# Generate chord
+fundsp = "0.20.0" 
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
 
-# Files
-tar = "0.4.44"
-bzip2 = "0.6.1"
-
+# Record
+midly = "0.5.3"
