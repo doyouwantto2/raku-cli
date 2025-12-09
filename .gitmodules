@@ -3,5 +3,5 @@
     url = https://github.com/sfzinstruments/SalamanderGrandPiano.git
 
 [submodule "splendid"]
-    path = splendid
-    url = https://github.com/sfzinstruments/SplendidGrandPiano.git
+	path = splendid
+	url = https://github.com/sfzinstruments/SplendidGrandPiano.git
